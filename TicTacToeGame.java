@@ -1,24 +1,42 @@
-public class TicTacToeGame {
-	public static char p_00;
-	public static char p_01;
-	public static char p_02;
-	public static char p_10;
-	public static char p_11;
-	public static char p_12;
-	public static char p_20;
-	public static char p_21;
-	public static char p_22;
+import java.util.*;
 
-	public static void uc1_Initialize() {
+public class TicTacToeGame {
+	
+	public static char comp_Input;
+
+	public static char[] uc1_Initialize() {
 		char[] empty_Board = new char[10];
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			empty_Board[i] = ' ';
 		}
+		return empty_Board;
+
 	}
 
-	public static void main(String[] args) {
-		System.out.println("Welcome to TicTacToe problem");
+	public static char uc2_Select_Char() {
+		System.out.println("Select X or O");
+		Scanner input = new Scanner(System.in);
+		char input_User = input.next().charAt(0);
+		char input_Final;
+		if (input_User == 'X') {
+			input_User = 'X';
+			comp_Input = 'O';
+
+		} else if (input_User == 'O') {
+			input_User = 'O';
+			comp_Input = 'x';
+		}
+		return input_User;
+	}
+
+	public static void main(String Args[]) {
+		System.out.println("Welcome to Tic Tac Toe");
 		uc1_Initialize();
+		char input_User1 = uc2_Select_Char();
+		System.out.println("User Selected input :" + input_User1);
+		System.out.println("Comp selected input :" + comp_Input);
 	}
 
 }
+
+
