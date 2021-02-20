@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class TicTacToeGame {
 
 	public static char comp_Input;
@@ -10,6 +8,7 @@ public class TicTacToeGame {
 	public static int input_count;
 	static int rand_Input_Comp;
 	static int chance;
+	public static int input_Position_Comp;
 
 	public static char[] uc1_Initialize() {
 
@@ -74,6 +73,7 @@ public class TicTacToeGame {
 
 				if (empty_Board[input_Position] == ' ') {
 					empty_Board[input_Position] = input_User1;
+					input_Position_Comp = input_Position;
 					input_count++;
 					break;
 				} else {
@@ -150,11 +150,28 @@ public class TicTacToeGame {
 				System.exit(0);
 				break;
 			}
+
 			Random rn = new Random();
 			rand_Input_Comp = rn.nextInt(10);
+			int rand_Input_Comp1 = input_Position_Comp + 1;
+			int rand_Input_Comp2 = input_Position_Comp - 1;
 
 			if (rand_Input_Comp > 0 && rand_Input_Comp < 10) {
-				if (empty_Board[rand_Input_Comp] == ' ') {
+
+				/*
+				 * if (empty_Board[rand_Input_Comp] == ' '|| empty_Board[rand_Input_Comp1]==' '
+				 * || empty_Board[rand_Input_Comp1]==' ' ) { empty_Board[rand_Input_Comp] =
+				 * comp_Input; input_count++; break;
+				 */
+				if (empty_Board[rand_Input_Comp1] == ' ') {
+					empty_Board[rand_Input_Comp1] = comp_Input;
+					input_count++;
+					break;
+				} else if (empty_Board[rand_Input_Comp2] == ' ') {
+					empty_Board[rand_Input_Comp2] = comp_Input;
+					input_count++;
+					break;
+				} else if (empty_Board[rand_Input_Comp] == ' ') {
 					empty_Board[rand_Input_Comp] = comp_Input;
 					input_count++;
 					break;
@@ -171,7 +188,11 @@ public class TicTacToeGame {
 	}
 
 	public static void main(String Args[]) {
-		System.out.println("Welcome to TicTacToe problem");
+		int play_Another_Game=0;
+		
+		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Welcome to TicTacToeProblem");
 		uc1_Initialize();
 		input_User1 = uc2_Select_Char();
 		System.out.println("User Selected input :" + input_User1);
@@ -198,6 +219,7 @@ public class TicTacToeGame {
 				uc7_Win_Tie_Change();
 				uc3_Display_Board();
 				System.out.println("----------------------------------------------------------------");
+				uc3_Display_Board();
 				continue;
 			} else if (chance == 1) {
 				uc4_Take_Input();
@@ -205,9 +227,14 @@ public class TicTacToeGame {
 				uc7_Win_Tie_Change();
 				uc3_Display_Board();
 				System.out.println("----------------------------------------------------------------");
+				uc3_Display_Board();
 				continue;
 			}
+			System.out.println("Enter 1 if you want to play another game");
+			play_Another_Game=sc.nextInt();
 		}
+	
+		
 
 	}
 }
